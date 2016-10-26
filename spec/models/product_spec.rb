@@ -22,4 +22,25 @@ RSpec.describe Product, type: :model do
       expect(Product.alphabetical).to eq([@productA,@productB,@productC])
     end
   end
+
+  describe "discount amout" do
+    it "Sale off 21% when price > 100,000 VND" do
+      @product = Product.new(name:"c", description:"product c", price_vnd:101000, weight:90);
+      @product.save
+      expect(@product.discount_amount()).to eq(0.21)
+    end
+
+    it "Sale off 31%% when price > 200,000" do
+      @product = Product.new(name:"c", description:"product c", price_vnd:201000, weight:90);
+      @product.save
+      expect(@product.discount_amount()).to eq(0.31)
+    end
+
+    it "Sale off 41%% when price > 800,000" do
+      @product = Product.new(name:"c", description:"product c", price_vnd:801000, weight:90);
+      @product.save
+      expect(@product.discount_amount()).to eq(0.41)
+    end
+
+  end
 end
