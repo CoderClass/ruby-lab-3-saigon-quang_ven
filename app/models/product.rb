@@ -16,6 +16,10 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def final_price
+    return (price_vnd - (price_vnd * discount_amount())).round(-4)
+  end
+
   private
 
   def set_default_image_path
